@@ -1,0 +1,9 @@
+server:
+  port: 30084
+spring:
+  application:
+    name: sub-asset-manage
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:30080/eureka

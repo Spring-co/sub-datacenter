@@ -1,0 +1,9 @@
+server:
+  port: 30082
+spring:
+  application:
+    name: sub-monitor-center
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:30080/eureka

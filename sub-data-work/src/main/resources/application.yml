@@ -1,0 +1,9 @@
+server:
+  port: 30083
+spring:
+  application:
+    name: sub-data-work
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:30080/eureka
