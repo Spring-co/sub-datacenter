@@ -1,0 +1,66 @@
+{
+  "bd_am_asset_list" : {
+    "aliases" : {
+      "ee_default_alias" : { }
+    },
+    "mappings" : {
+      "properties" : {
+        "asset_code" : {
+          "type" : "text",
+          "analyzer" : "ik_smart"
+        },
+        "asset_introduction" : {
+          "type" : "text",
+          "analyzer" : "ik_smart"
+        },
+        "asset_name" : {
+          "type" : "text",
+          "analyzer" : "ik_max_word"
+        },
+        "asset_status" : {
+          "type" : "keyword"
+        },
+        "asset_type" : {
+          "type" : "keyword"
+        },
+        "create_time" : {
+          "type" : "date",
+          "format" : "yyyy-MM-dd HH:mm:ss"
+        },
+        "del_flag" : {
+          "type" : "keyword"
+        },
+        "dept_dir_id" : {
+          "type" : "keyword"
+        },
+        "industry_dir_id" : {
+          "type" : "keyword"
+        },
+        "remarks" : {
+          "type" : "text",
+          "analyzer" : "ik_smart"
+        },
+        "theme_dir_id" : {
+          "type" : "keyword"
+        },
+        "update_time" : {
+          "type" : "date",
+          "format" : "yyyy-MM-dd HH:mm:ss"
+        }
+      }
+    },
+    "settings" : {
+      "index" : {
+        "number_of_shards" : "1",
+        "provided_name" : "bd_am_asset_list",
+        "max_result_window" : "10000",
+        "creation_date" : "1756365697071",
+        "number_of_replicas" : "1",
+        "uuid" : "6nm23AKoSyyYOvA-15lxjg",
+        "version" : {
+          "created" : "7080099"
+        }
+      }
+    }
+  }
+}

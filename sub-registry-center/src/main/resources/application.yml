@@ -3,7 +3,23 @@ server:
 spring:
   application:
     name: sub-register-center
+  security:
+    user:
+      name: admin
+      password: 123456
+      roles: ADMIN
+#eureka-服务端配置
 eureka:
   client:
+    # 是否注册到其他 Eureka 节点（单节点设为 false）
+    register-with-eureka: false
+    # 是否从其他 Eureka 节点拉取注册表（单节点设为 false）
+    fetch-registry: false
+    # 指定服务 URL（虽然是自己，但必须配置）
     service-url:
       defaultZone: http://127.0.0.1:30080/eureka
+  instance:
+    hostname: localhost
+    # 不将自己作为客户端注册到其他服务器（单节点时设置为 false）
+    prefer-ip-address: false
+    instance-id: ${spring.application.name}:${server.port}

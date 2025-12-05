@@ -1,11 +1,19 @@
 server:
-  port: 30084
+  port: 8088
   servlet:
-    context-path: /asset
-
+    context-path: /data-map
 spring:
   application:
-    name: sub-asset-manage
+    name: sub-data-map
+easy-es:
+  compatible: true # 兼容模式开关,默认为false,若您的es客户端版本小于8.x,务必设置为true才可正常使用,8.x及以上则可忽略此项配置
+  enable: true #默认为true,若为false则认为不启用本框架
+  address : 127.0.0.1:9200 # es的连接地址,必须含端口 若为集群,则可以用逗号隔开 例如:127.0.0.1:9200,127.0.0.2:9200
+  username: #若无 则可省略此行配置
+  password: #若无 则可省略此行配置
+  global-config:
+    db-config:
+      map-underscore-to-camel-case: true
 eureka:
   client:
     #eureka-服务端地址，多节点,隔开
@@ -38,8 +46,8 @@ eureka:
       environment: dev
 
 # 启用 Actuator 健康检查端点
-#management:
-#  endpoints:
-#    web:
-#      exposure:
-#        include: "*"
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

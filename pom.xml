@@ -14,6 +14,9 @@
         <module>sub-monitor-center</module>
         <module>sub-service-center</module>
         <module>sub-registry-center</module>
+        <module>sub-data-map</module>
+        <module>sub-unified-gateway</module>
+        <module>sub-datacenter-common</module>
     </modules>
 
     <properties>
@@ -24,6 +27,7 @@
         <java.version>1.8</java.version>
     </properties>
 
+    <!--依赖本地基础依赖包-->
     <parent>
         <groupId>com.frame.sulent</groupId>
         <artifactId>sulent-frame-basic</artifactId>

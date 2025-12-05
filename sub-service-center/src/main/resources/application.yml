@@ -1,9 +1,79 @@
 server:
   port: 30081
+  servlet:
+    context-path: /service-center
 spring:
   application:
     name: sub-service-center
+  cloud:
+    #负载均衡配置
+    loadbalancer:
+      retry:
+        enabled: true # 开启重试
+        max-retries-on-same-service-instance: 0 # 同一实例不重试
+        max-retries-on-next-service-instance: 1 # 切换实例重试1次
+        retryable-status-codes: 503,504 # 对503/504状态码重试
+    #开启断路器
+    circuitbreaker:
+      resilience4j:
+        enabled: true
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        # 滑动窗口大小（统计最近多少次调用）
+        sliding-window-size: 10
+        # 滑动窗口类型（COUNT_BASED：基于次数，TIME_BASED：基于时间）
+        sliding-window-type: COUNT_BASED
+        # 失败率阈值，超过则打开熔断器
+        failure-rate-threshold: 50
+        # 熔断器打开后，等待多久进入半开状态（毫秒）
+        wait-duration-in-open-state: 5000
+        # 最小请求数，达到后才开始计算失败率
+        minimum-number-of-calls: 5
+        # 自动从 OPEN 转为 HALF_OPEN 的时间（单位：ms）
+        # 允许半开状态下最多多少次调用
+        permitted-number-of-calls-in-half-open-state: 3
+
 eureka:
   client:
+    #eureka-服务端地址，多节点,隔开
     service-url:
-      defaultZone: http://127.0.0.1:30080/eureka
+      defaultZone: http://admin:123456@127.0.0.1:30080/eureka
+    # 是否注册到 Eureka
+    register-with-eureka: true
+    # 是否拉取服务列表
+    fetch-registry: true
+    # 拉取服务列表间隔
+    registry-fetch-interval-seconds: 30
+  instance:
+    # 优先使用 IP 注册
+    prefer-ip-address: true
+    # 自定义实例 ID 显示
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${server.port}}
+    # 心跳间隔
+    lease-renewal-interval-in-seconds: 30
+    # 续约到期时间
+    lease-expiration-duration-in-seconds: 90
+    # 健康检查路径
+    health-check-url-path: /actuator/health
+    # 状态页路径
+    status-page-url-path: /actuator/info
+    # 主页路径
+    home-page-url-path: /
+    # 添加元数据
+    metadata-map:
+      version: 1.0.0
+      environment: dev
+#feign-client配置
+feign:
+  client:
+    config:
+      default:
+        logger-level: BASIC
+# 启用 Actuator 健康检查端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
